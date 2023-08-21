@@ -10,7 +10,7 @@ print("yes or no")
 
 answer = input()
 if answer == "yes":
-    import main
+
     exec(open('main.py').read())
 if answer == "no":
     print("now you can close projhub safely")
