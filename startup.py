@@ -12,7 +12,5 @@ answer = input()
 if answer == "yes":
     import main
     exec(open('main.py').read())
-    print("didnt open the file main.py?")
-    os.system('python file.py')
 if answer == "no":
-    print("now you can close the program safely")
+    print("now you can close projhub safely")
