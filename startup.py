@@ -9,7 +9,7 @@ print("this is currently in development are you sure you still want to open the 
 print("yes or no")
 answer = input()
 if answer == "yes":
-
     exec(open('main.py').read())
 if answer == "no":
     print("now you can close projhub safely")
+
