@@ -48,8 +48,6 @@ elif project_id == "2":
     #  - work on dice
     #  - add more ideas!
     #  - add automatic detection of projects
-
-    # can you check that this file works?
     
 else:
     print("this project does not exist")
