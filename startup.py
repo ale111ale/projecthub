@@ -3,11 +3,10 @@ print("Thanks for dowloading from github")
 
 print("make sure to install python 3 or later")
 
-print("i am programming a pre-release version for the main hub ")
+print("this is a pre-release version for the main hub ")
 
-print("do you want to open the hub anyway?")
+print("this is currently in development are you sure you still want to open the hub?")
 print("yes or no")
-
 answer = input()
 if answer == "yes":
 
