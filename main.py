@@ -1,9 +1,8 @@
 print("Welcome to projhub")
 print("")
-print("please make an issue if you find a bug")
-print("and also make sure you add the bug tag")
+print("Please make an issue if you find a bug")
 print("")
-print("Use responsibly -Alessandro")
+print("Use responsibly Ale111Ale")
 
 
 print("press y to open pyexplorer")

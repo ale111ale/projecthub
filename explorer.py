@@ -4,10 +4,9 @@ print("#                   Welcome to PythonExplorer                            
 print("#                                                                        #")
 print("#                   Use this software Responsibly                        #")
 print("#                                                                        #")
-print("#          Thanks for using this TUI please report any bug on this TUI   #")
 print("##########################################################################")
 
-print("########################################LinkWindow#####################################################")
+print("########################################Window#########################################################")
 print("# Please Help me to find a more efficent way to use this without having to type lots of lines of code #")
 print("#######################################################################################################")
 
@@ -43,7 +42,7 @@ elif project_id == "2":
     
     # wait
     # TO DO LIST
-    #  - check if this works
+    #  V check if this works
     #  - work on tic_tac_toe
     #  V work on dice
     #  - add more ideas!
