@@ -47,7 +47,7 @@ elif project_id == "2":
     #  V work on dice
     #  - add more ideas!
     #  - add automatic detection of projects
-    #  - add a back button
+    #  V add a back button
     
 else:
     print("this project does not exist")
