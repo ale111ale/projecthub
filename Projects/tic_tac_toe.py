@@ -3,4 +3,11 @@ def main():
     print("developed by alessandro with help from rylmovuk")
     print()
     print()
-    print("WARNING: this project is not implemented yet")
+    print("ERROR: Not Implemented")
+    print("Press SPACE to go back")
+    import runpy
+    answer = input()
+    if answer == " ":
+        project = runpy.run_path(f"./explorer.py")
+        back_to_explorer = project["main"]
+        back_to_explorer()
