@@ -48,6 +48,6 @@ elif project_id == "2":
     #  - add more ideas!
     #  - add automatic detection of projects
     #  V add a back button
-    
+
 else:
     print("this project does not exist")
