@@ -6,8 +6,8 @@ print("#                   Use this software Responsibly                        
 print("#                                                                        #")
 print("##########################################################################")
 
-print("########################################Window#########################################################")
-print("# Please Help me to find a more efficent way to use this without having to type lots of lines of code #")
+print("===============================================PythonVER===============================================")
+print("#                                     PythonExprorer git_prerelease Build 22                          #")
 print("#######################################################################################################")
 
 print("this project was made with collaboration from rylmovuk")
