@@ -18,6 +18,7 @@ def run_ttt_game():
             print('This cell is not free. try again')
             continue
 
+        print()
         # now we can place the symbol
         grid[row][col] = turn
 
