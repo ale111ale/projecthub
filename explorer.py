@@ -24,7 +24,11 @@ print("1. dice")
 print("2. tic_tac_toe")
 print()
 print("Which project would you like to open?")
-
+print("Debug_Info: project_id is a string")
+print("Debug_Info: there are commented strings `#` in the code to show how runpy works")
+print("Debug_Info: the code for the projects is in the Projects folder")
+print("you can see how the code works for each project by looking in the Projects folder")
+print("All code is written in python")
 project_id = input()
 if project_id == "1": # remember that we need the quotes! because input() always returns a string, not a number
     project = runpy.run_path(f"./Projects/dice.py") # get all the code
@@ -43,7 +47,7 @@ elif project_id == "2":
     # wait
     # TO DO LIST
     #  V check if this works
-    #  - work on tic_tac_toe
+    #  V work on tic_tac_toe
     #  V work on dice
     #  - add more ideas!
     #  - add automatic detection of projects
