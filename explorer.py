@@ -7,7 +7,7 @@ print("#                                                                        
 print("##########################################################################")
 
 print("===============================================PythonVER===============================================")
-print("#                                     PythonExprorer git_prerelease Build 32                          #")
+print("#                                     PythonExprorer git_prerelease Build 34                          #")
 print("#######################################################################################################")
 
 print("this project was made with collaboration from rylmovuk")
