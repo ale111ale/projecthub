@@ -14,8 +14,7 @@ print("this project was made with collaboration from rylmovuk")
 
 
 import runpy   # this library lets us run other python files more conveniently
-project_list = [] # empty for now
-
+project_list = [2] 
 
 
 print("Here are the available projects:")
@@ -24,7 +23,6 @@ print("1. dice")
 print("2. tic_tac_toe")
 print()
 print("Which project would you like to open?")
-print("Debug_Info: project_id is a string")
 print("Debug_Info: there are commented strings `#` in the code to show how runpy works")
 print("Debug_Info: the code for the projects is in the Projects folder")
 print("you can see how the code works for each project by looking in the Projects folder")
@@ -52,6 +50,6 @@ elif project_id == "2":
     #  - add more ideas!
     #  - add automatic detection of projects
     #  V add a back button
-
+    #  - make a score counter
 else:
     print("this project does not exist")
