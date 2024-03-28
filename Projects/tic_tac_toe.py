@@ -83,9 +83,3 @@ def main():
         back_to_explorer = project["main"]
         back_to_explorer()
         
-#What should i do?
-# just watch, if you want to
-# ask questions if you have any
-# i want to explain to you what i'm doing
-# if we finish then this is getting released 1.0
-# 

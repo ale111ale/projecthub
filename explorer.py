@@ -14,12 +14,20 @@ print("Here are the available projects:")
 print()
 print("1. dice")
 print("2. tic_tac_toe")
+print("3. tetris")
+print()
 print()
 print("Which project would you like to open?")
+print()
 print("Debug_Info: there are commented strings `#` in the code to show how runpy works")
 print("Debug_Info: the code for the projects is in the Projects folder")
 print("you can see how the code works for each project by looking in the Projects folder")
+print()
+print()
 print("All code is written in python")
+print("dependencies: pygame runpy random math sys")
+print()
+print("Tetris game copied from ibrahimAtespare. MIT licence can be found in licencesfor3thparty\\MITlicencefortetris-game.txt ")
 project_id = input()
 if project_id == "1": # remember that we need the quotes! because input() always returns a string, not a number
     project = runpy.run_path(f"./Projects/dice.py") # get all the code
@@ -34,7 +42,12 @@ elif project_id == "2":
     project = runpy.run_path(f"./Projects/tic_tac_toe.py") 
     project_main = project["main"] 
     project_main()
-    
+
+elif project_id == "3":
+    project = runpy.run_path(f"./Projects/tetris.py")
+    project_main = project["main"]
+    project_main()
+
     # wait
     # TO DO LIST
     #  V check if this works
