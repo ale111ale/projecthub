@@ -1,13 +1,6 @@
-print("##################################PythonExplorer##########################")
-print("#                                                                        #")
-print("#                   Welcome to PythonExplorer                            #")
-print("#                                                                        #")
-print("#                   Use this software Responsibly                        #")
-print("#                                                                        #")
-print("##########################################################################")
 
 print("===============================================PythonVER===============================================")
-print("#                                     PythonExprorer git_prerelease Build 34                          #")
+print("#                                     PythonExprorer git_prerelease Build 35                                #")
 print("#######################################################################################################")
 
 print("this project was made with collaboration from rylmovuk")
