@@ -3,21 +3,21 @@
 #Date: 26.05.2018
 
 import pygame #version 1.9.3
-import random
+import random 
 import math
 import sys
 
-pygame.init()
-pygame.font.init()
+pygame.init() #starts pygame
+pygame.font.init() #initializes font library
 
-DISPLAY_WIDTH = 800
-DISPLAY_HEIGHT = 600
+DISPLAY_WIDTH = 800 #Defines Width of the window
+DISPLAY_HEIGHT = 600 #Defines Height of the window
 
-gameDisplay = pygame.display.set_mode((DISPLAY_WIDTH,DISPLAY_HEIGHT))
-pygame.display.set_caption('Tetris')
-clock = pygame.time.Clock()
+gameDisplay = pygame.display.set_mode((DISPLAY_WIDTH,DISPLAY_HEIGHT)) #Sets the display window
+pygame.display.set_caption('Tetris') #Sets the title of the window
+clock = pygame.time.Clock() #Defines the clock
 
-pieceNames = ('I', 'O', 'T', 'S', 'Z', 'J', 'L')
+pieceNames = ('I', 'O', 'T', 'S', 'Z', 'J', 'L') # List of all the available pieces
 
 STARTING_LEVEL = 0 #Change this to start a new game at a higher level
 
@@ -34,14 +34,15 @@ GAMEOVER_FONT_SIZE = 66
 TITLE_FONT_SIZE = 70
 VERSION_FONT_SIZE = 20
 
-fontSB = pygame.font.SysFont('agencyfb', SB_FONT_SIZE)
+#Font definitions
+fontSB = pygame.font.SysFont('agencyfb', SB_FONT_SIZE) 
 fontSmall = pygame.font.SysFont('agencyfb', FONT_SIZE_SMALL)
 fontPAUSE = pygame.font.SysFont('agencyfb', PAUSE_FONT_SIZE)
 fontGAMEOVER = pygame.font.SysFont('agencyfb', GAMEOVER_FONT_SIZE)
 fontTitle = pygame.font.SysFont('agencyfb', TITLE_FONT_SIZE)
 fontVersion = pygame.font.SysFont('agencyfb', VERSION_FONT_SIZE)
 
-ROW = (0)
+ROW = (0) 
 COL = (1)
 
 #Some color definitions
@@ -54,7 +55,7 @@ BORDER_COLOR = GRAY
 NUM_COLOR = WHITE
 TEXT_COLOR = GRAY
 
-blockColors = {
+blockColors = {		#Defines colors of the tetriminos
 'I' : (19,232,232), #CYAN
 'O' : (236,236,14), #YELLOW
 'T' : (126,5,126), #PURPLE
@@ -73,7 +74,7 @@ pieceDefs = {
 'J' : ((0,0),(1,0),(1,1),(1,2)),
 'L' : ((0,2),(1,0),(1,1),(1,2)) }
 
-directions = {
+directions = {		#Sets the controls for the player
 'down' : (1,0),
 'right' : (0,1),
 'left' : (0,-1),
@@ -196,10 +197,11 @@ class MainBoard:
 		self.lines = 0
 		
 		gameClock.restart()
-		
+	#Defines a function to erase tetriminos	
 	def erase_BLOCK(self,xRef,yRef,row,col):
 		pygame.draw.rect(gameDisplay, BLACK, [xRef+(col*self.blockSize),yRef+(row*self.blockSize),self.blockSize,self.blockSize],0)
-		
+
+	#Defines functions to draw the tetriminos	
 	def draw_BLOCK(self,xRef,yRef,row,col,color):
 		pygame.draw.rect(gameDisplay, BLACK, [xRef+(col*self.blockSize),yRef+(row*self.blockSize),self.blockSize,self.blockLineWidth],0)
 		pygame.draw.rect(gameDisplay, BLACK, [xRef+(col*self.blockSize)+self.blockSize-self.blockLineWidth,yRef+(row*self.blockSize),self.blockLineWidth,self.blockSize],0)
@@ -207,42 +209,43 @@ class MainBoard:
 		pygame.draw.rect(gameDisplay, BLACK, [xRef+(col*self.blockSize),yRef+(row*self.blockSize)+self.blockSize-self.blockLineWidth,self.blockSize,self.blockLineWidth],0)
 
 		pygame.draw.rect(gameDisplay, color, [xRef+(col*self.blockSize)+self.blockLineWidth,yRef+(row*self.blockSize)+self.blockLineWidth,self.blockSize-(2*self.blockLineWidth),self.blockSize-(2*self.blockLineWidth)],0)
-	
+	#Defines a function to draw the game board border
 	def draw_GAMEBOARD_BORDER(self):
 		pygame.draw.rect(gameDisplay, BORDER_COLOR, [self.xPos-self.boardLineWidth-self.blockLineWidth,self.yPos-self.boardLineWidth-self.blockLineWidth,(self.blockSize*self.colNum)+(2*self.boardLineWidth)+(2*self.blockLineWidth),self.boardLineWidth],0)
 		pygame.draw.rect(gameDisplay, BORDER_COLOR, [self.xPos+(self.blockSize*self.colNum)+self.blockLineWidth,self.yPos-self.boardLineWidth-self.blockLineWidth,self.boardLineWidth,(self.blockSize*self.rowNum)+(2*self.boardLineWidth)+(2*self.blockLineWidth)],0)
 		pygame.draw.rect(gameDisplay, BORDER_COLOR, [self.xPos-self.boardLineWidth-self.blockLineWidth,self.yPos-self.boardLineWidth-self.blockLineWidth,self.boardLineWidth,(self.blockSize*self.rowNum)+(2*self.boardLineWidth)+(2*self.blockLineWidth)],0)
 		pygame.draw.rect(gameDisplay, BORDER_COLOR, [self.xPos-self.boardLineWidth-self.blockLineWidth,self.yPos+(self.blockSize*self.rowNum)+self.blockLineWidth,(self.blockSize*self.colNum)+(2*self.boardLineWidth)+(2*self.blockLineWidth),self.boardLineWidth],0)
 	
+	#Defines a function to draw the game board and title screen content
 	def draw_GAMEBOARD_CONTENT(self):
-	
-		if self.gameStatus == 'firstStart':	
-			
-			titleText = fontTitle.render('TETRIS', False, WHITE)
-			gameDisplay.blit(titleText,(self.xPos++1.55*self.blockSize,self.yPos+8*self.blockSize))
-			
-			versionText = fontVersion.render('v 1.0', False, WHITE)
-			gameDisplay.blit(versionText,(self.xPos++7.2*self.blockSize,self.yPos+11.5*self.blockSize))
-			
-		else:
 		
+		if self.gameStatus == 'firstStart':	
+			#Sets the title text
+			titleText = fontTitle.render('TETRIS', False, WHITE) #Change Tetris to any name you want
+			gameDisplay.blit(titleText,(self.xPos++1.55*self.blockSize,self.yPos+8*self.blockSize))
+			#Shows the version of the game
+			versionText = fontVersion.render('v 1.0', False, WHITE) #Modify v.1.0 here to change the game version shown
+			gameDisplay.blit(versionText,(self.xPos++7.2*self.blockSize,self.yPos+11.5*self.blockSize))
+		#Loads your progress	
+		else:
+			
 			for row in range(0,self.rowNum):
 				for col in range(0,self.colNum):
-					if self.blockMat[row][col] == 'empty':
+					if self.blockMat[row][col] == 'empty': #Makes a status for a empty space
 						self.erase_BLOCK(self.xPos,self.yPos,row,col)
-					else:
+					else: #Draws a tetrimino on the game board if there was meant to be a block there
 						self.draw_BLOCK(self.xPos,self.yPos,row,col,blockColors[self.blockMat[row][col]])
-						
+						#Draws the current piece if it is moving to the place that the user said
 			if self.piece.status == 'moving':
 				for i in range(0,4):
 					self.draw_BLOCK(self.xPos,self.yPos,self.piece.blocks[i].currentPos.row, self.piece.blocks[i].currentPos.col, blockColors[self.piece.type])
 					
-			if self.gamePause == True:
+			if self.gamePause == True: #Shows the pause text if the game is paused
 				pygame.draw.rect(gameDisplay, DARK_GRAY, [self.xPos+1*self.blockSize,self.yPos+8*self.blockSize,8*self.blockSize,4*self.blockSize],0)
 				pauseText = fontPAUSE.render('PAUSE', False, BLACK)
 				gameDisplay.blit(pauseText,(self.xPos++1.65*self.blockSize,self.yPos+8*self.blockSize))
 			
-			if self.gameStatus == 'gameOver':
+			if self.gameStatus == 'gameOver': #Shows the game over screen if the game status is set to gameOver
 				pygame.draw.rect(gameDisplay, LIGHT_GRAY, [self.xPos+1*self.blockSize,self.yPos+8*self.blockSize,8*self.blockSize,8*self.blockSize],0)
 				gameOverText0 = fontGAMEOVER.render('GAME', False, BLACK)
 				gameDisplay.blit(gameOverText0,(self.xPos++2.2*self.blockSize,self.yPos+8*self.blockSize))
@@ -250,46 +253,49 @@ class MainBoard:
 				gameDisplay.blit(gameOverText1,(self.xPos++2.35*self.blockSize,self.yPos+12*self.blockSize))
 		
 		
-	def draw_SCOREBOARD_BORDER(self):
+	def draw_SCOREBOARD_BORDER(self): #Draws the border for the scoreboard
 		pygame.draw.rect(gameDisplay, BORDER_COLOR, [self.xPos+(self.blockSize*self.colNum)+self.blockLineWidth,self.yPos-self.boardLineWidth-self.blockLineWidth,self.scoreBoardWidth+self.boardLineWidth,self.boardLineWidth],0)
 		pygame.draw.rect(gameDisplay, BORDER_COLOR, [self.xPos+(self.blockSize*self.colNum)+self.boardLineWidth+self.blockLineWidth+self.scoreBoardWidth,self.yPos-self.boardLineWidth-self.blockLineWidth,self.boardLineWidth,(self.blockSize*self.rowNum)+(2*self.boardLineWidth)+(2*self.blockLineWidth)],0)
 		pygame.draw.rect(gameDisplay, BORDER_COLOR, [self.xPos+(self.blockSize*self.colNum)+self.blockLineWidth,self.yPos+(self.blockSize*self.rowNum)+self.blockLineWidth,self.scoreBoardWidth+self.boardLineWidth,self.boardLineWidth],0)
 	
-	def draw_SCOREBOARD_CONTENT(self):
+	def draw_SCOREBOARD_CONTENT(self): #Draws the scoreboard content
 		
 		xPosRef = self.xPos+(self.blockSize*self.colNum)+self.boardLineWidth+self.blockLineWidth
 		yPosRef = self.yPos
 		yLastBlock = self.yPos+(self.blockSize*self.rowNum)
 	
-		if self.gameStatus == 'running':
+		if self.gameStatus == 'running': #if the gameStatus is running, draws the "next" text on the scoreboard
 			nextPieceText = fontSB.render('next:', False, TEXT_COLOR)
 			gameDisplay.blit(nextPieceText,(xPosRef+self.blockSize,self.yPos))
 			
-			blocks = [[0,0],[0,0],[0,0],[0,0]]
-			origin = [0,0]
+			# the next part draws the upcoming tetrimino on the scoreboard
+			blocks = [[0,0],[0,0],[0,0],[0,0]] #sets the value blocks as [0,0] [0,0] [0,0] [0,0] (the default value)
+			origin = [0,0] #sets the value origin as [0,0] (the default value)
+			
+			#sets `blocks` to the block coords that make up the next tetrimino, adjusted to `origin`
 			for i in range(0,4):
-				blocks[i][ROW] = origin[ROW] + pieceDefs[self.nextPieces[1]][i][ROW]
+				blocks[i][ROW] = origin[ROW] + pieceDefs[self.nextPieces[1]][i][ROW] 
 				blocks[i][COL] = origin[COL] + pieceDefs[self.nextPieces[1]][i][COL]
 				
-				if self.nextPieces[1] == 'O':
+				if self.nextPieces[1] == 'O': #Draws the O piece as the next tetrimino
 					self.draw_BLOCK(xPosRef+0.5*self.blockSize,yPosRef+2.25*self.blockSize,blocks[i][ROW],blocks[i][COL],blockColors[self.nextPieces[1]])
-				elif self.nextPieces[1] == 'I':
+				elif self.nextPieces[1] == 'I': #Draws the I piece as the next tetrimino
 					self.draw_BLOCK(xPosRef+0.5*self.blockSize,yPosRef+1.65*self.blockSize,blocks[i][ROW],blocks[i][COL],blockColors[self.nextPieces[1]])
-				else:
+				else: #Generates the next piece and draws it as the next tetrimino
 					self.draw_BLOCK(xPosRef+1*self.blockSize,yPosRef+2.25*self.blockSize,blocks[i][ROW],blocks[i][COL],blockColors[self.nextPieces[1]])
 			
-			if self.gamePause == False:
+			if self.gamePause == False: #Draws the "P -> pause" text on the scoreboard if the game is not paused
 				pauseText = fontSmall.render('P -> pause', False, WHITE)
 				gameDisplay.blit(pauseText,(xPosRef+1*self.blockSize,yLastBlock-15*self.blockSize))
-			else:
+			else: #Draws the "P -> unpause" text on the scoreboard if the game is paused
 				unpauseText = fontSmall.render('P -> unpause', False, self.whiteSineAnimation())
 				gameDisplay.blit(unpauseText,(xPosRef+1*self.blockSize,yLastBlock-15*self.blockSize))
-				
+				#Draws the "R -> restart" text on the scoreboard
 			restartText = fontSmall.render('R -> restart', False, WHITE)
 			gameDisplay.blit(restartText,(xPosRef+1*self.blockSize,yLastBlock-14*self.blockSize))
 					
-		else:
-		
+		else: # if the game is not running, renders the start screen
+		    # Draws "press" "enter" "to" on three lines
 			yBlockRef = 0.3
 			text0 = fontSB.render('press', False, self.whiteSineAnimation())
 			gameDisplay.blit(text0,(xPosRef+self.blockSize,self.yPos+yBlockRef*self.blockSize))
@@ -297,6 +303,7 @@ class MainBoard:
 			gameDisplay.blit(text1,(xPosRef+self.blockSize,self.yPos+(yBlockRef+1.5)*self.blockSize))
 			text2 = fontSB.render('to', False, self.whiteSineAnimation())
 			gameDisplay.blit(text2,(xPosRef+self.blockSize,self.yPos+(yBlockRef+3)*self.blockSize))
+			# Draws "start" or "restart" based on whether it is the first round or notwas 
 			if self.gameStatus == 'firstStart':
 				text3 = fontSB.render('start', False, self.whiteSineAnimation())
 				gameDisplay.blit(text3,(xPosRef+self.blockSize,self.yPos+(yBlockRef+4.5)*self.blockSize))
@@ -304,18 +311,22 @@ class MainBoard:
 				text3 = fontSB.render('restart', False, self.whiteSineAnimation())
 				gameDisplay.blit(text3,(xPosRef+self.blockSize,self.yPos+(yBlockRef+4.5)*self.blockSize))		
 		
+		# Draws the border
 		pygame.draw.rect(gameDisplay, BORDER_COLOR, [xPosRef,yLastBlock-12.5*self.blockSize,self.scoreBoardWidth,self.boardLineWidth],0)
 		
+		# Draws the score
 		scoreText = fontSB.render('score:', False, TEXT_COLOR)
 		gameDisplay.blit(scoreText,(xPosRef+self.blockSize,yLastBlock-12*self.blockSize))
 		scoreNumText = fontSB.render(str(self.score), False, NUM_COLOR)
 		gameDisplay.blit(scoreNumText,(xPosRef+self.blockSize,yLastBlock-10*self.blockSize))
 		
+		# Draws the current level
 		levelText = fontSB.render('level:', False, TEXT_COLOR)
 		gameDisplay.blit(levelText,(xPosRef+self.blockSize,yLastBlock-8*self.blockSize))
 		levelNumText = fontSB.render(str(self.level), False, NUM_COLOR)
 		gameDisplay.blit(levelNumText,(xPosRef+self.blockSize,yLastBlock-6*self.blockSize))
 		
+		# Draws the number of lines cleared
 		linesText = fontSB.render('lines:', False, TEXT_COLOR)
 		gameDisplay.blit(linesText,(xPosRef+self.blockSize,yLastBlock-4*self.blockSize))
 		linesNumText = fontSB.render(str(self.lines), False, NUM_COLOR)
@@ -330,6 +341,7 @@ class MainBoard:
 		self.draw_GAMEBOARD_CONTENT()
 		self.draw_SCOREBOARD_CONTENT()
 		
+	# Returns a list of three numbers representing a white sine animation, used in text rendering by pygame
 	def whiteSineAnimation(self):
 		
 		sine = math.floor(255 * math.fabs(math.sin(2*math.pi*(gameClock.frameTick/(SINE_ANI_PERIOD*2)))))
@@ -337,6 +349,7 @@ class MainBoard:
 		sineEffect = [sine,sine,sine]
 		return sineEffect
 	
+	# Clears lines according to the clearedLines list
 	def lineClearAnimation(self):
 	
 		clearAniStage = math.floor((gameClock.frameTick - gameClock.clearAniStart)/CLEAR_ANI_PERIOD)
@@ -384,46 +397,46 @@ class MainBoard:
 			
 		return clearedLines
 	
-	def prepareNextSpawn(self):
+	def prepareNextSpawn(self): # Prepares to spawn the next piece
 		self.generateNextPiece()
 		self.lineClearStatus = 'idle'
 		self.piece.status = 'uncreated'
 	
-	def generateNextTwoPieces(self):
+	def generateNextTwoPieces(self): #Generates two random pieces for the next spawn
 		self.nextPieces[0] = pieceNames[random.randint(0,6)]
 		self.nextPieces[1] = pieceNames[random.randint(0,6)]
 		self.piece.type = self.nextPieces[0]
 		
-	def generateNextPiece(self):
+	def generateNextPiece(self): #Generates a random piece for the next spawn
 		self.nextPieces[0] = self.nextPieces[1]
 		self.nextPieces[1] = pieceNames[random.randint(0,6)]
 		self.piece.type = self.nextPieces[0]
 		
-	def checkAndApplyGameOver(self):
+	def checkAndApplyGameOver(self): #Checks if a game over should occur, and if so, applies it
 		if self.piece.gameOverCondition == True:
 			self.gameStatus = 'gameOver'
 			for i in range(0,4):
 				if self.piece.blocks[i].currentPos.row >= 0 and self.piece.blocks[i].currentPos.col >= 0:
 					self.blockMat[self.piece.blocks[i].currentPos.row][self.piece.blocks[i].currentPos.col] = self.piece.type
 	
-	def updateScores(self):
+	def updateScores(self): #Updates the score
 		
-		clearedLinesNum = 0
+		clearedLinesNum = 0 #Sets the number of cleared lines to 0
 		for i in range(0,4):
-			if self.clearedLines[i] > -1:
+			if self.clearedLines[i] > -1: # if the cleared lines is more than -1 adds a cleared line to the counter
 				clearedLinesNum = clearedLinesNum + 1
 				
-		self.score = self.score + (self.level+1)*baseLinePoints[clearedLinesNum] + self.piece.dropScore
-		if self.score > 999999:
+		self.score = self.score + (self.level+1)*baseLinePoints[clearedLinesNum] + self.piece.dropScore #add the score based on the number of cleared lines and dropping a piece
+		if self.score > 999999: #if the score is more than 999999, sets it to 999999
 			self.score = 999999
 		self.lines = self.lines + clearedLinesNum
 		self.level = STARTING_LEVEL + math.floor(self.lines/10)
-		if self.level > 99:
+		if self.level > 99: #if the level is more than 99, sets it to 99
 			self.level = 99
 	
 	def updateSpeed(self):
 	
-		if self.level < 29:
+		if self.level < 29: #Sets the falling speed of the piece based on the level
 			gameClock.fall.framePeriod = levelSpeeds[self.level]
 		else:
 			gameClock.fall.framePeriod = 1
@@ -440,6 +453,7 @@ class MainBoard:
 		
 		elif self.gameStatus == 'running':
 			
+			# Restart if the restart key has been pressed
 			if key.restart.trig == True:
 				self.restart()
 				key.restart.trig = False
@@ -448,14 +462,14 @@ class MainBoard:
 			
 				self.piece.move(self.blockMat)
 				self.checkAndApplyGameOver()
-				
+				# Handle pause key being pressed
 				if key.pause.trig == True:
 					gameClock.pause()
 					self.gamePause = True
 					key.pause.trig = False
 				
-				if self.gameStatus != 'gameOver':
-					if self.piece.status == 'moving':
+				if self.gameStatus != 'gameOver': # if not game over yet
+					if self.piece.status == 'moving': # if the current piece is moving, handle rotate keys
 						if key.rotate.trig == True:	
 							self.piece.rotate('CW')
 							key.rotate.trig = False
@@ -464,20 +478,20 @@ class MainBoard:
 							self.piece.rotate('cCW')
 							key.cRotate.trig = False
 							
-					elif self.piece.status == 'collided':			
-						if self.lineClearStatus == 'idle':
+					elif self.piece.status == 'collided': # if the piece collided		
+						if self.lineClearStatus == 'idle': # if no clear, place the block onto the playing field
 							for i in range(0,4):
 								self.blockMat[self.piece.blocks[i].currentPos.row][self.piece.blocks[i].currentPos.col] = self.piece.type
 							self.clearedLines = self.getCompleteLines()
 							self.updateScores()
 							self.updateSpeed()
-						elif self.lineClearStatus == 'clearRunning':
+						elif self.lineClearStatus == 'clearRunning': # if lines were cleared, perform the clear on the playing field
 							self.lineClearAnimation()
 						else: # 'clearFin'
 							self.dropFreeBlocks()					
 							self.prepareNextSpawn()
 			
-			else: # self.gamePause = False
+			else: # if game paused
 				if key.pause.trig == True:
 					gameClock.unpause()
 					self.gamePause = False
@@ -510,19 +524,19 @@ class MovingPiece:
 		self.dropScore = 0
 		self.lastMoveType = 'noMove'
 	
-	def applyNextMove(self):
+	def applyNextMove(self): #Applies the next move of the tetrimino
 		for i in range(0,4):
 			self.blocks[i].currentPos.col = self.blocks[i].nextPos.col
 			self.blocks[i].currentPos.row = self.blocks[i].nextPos.row
 	
-	def applyFastMove(self):
+	def applyFastMove(self): #Applies the next move of the tetrimino faster
 		
 		if gameClock.move.check(gameClock.frameTick) == True:
 			if self.lastMoveType == 'downRight' or self.lastMoveType == 'downLeft' or self.lastMoveType == 'down':
 				self.dropScore = self.dropScore + 1
 			self.applyNextMove()
 			
-	def slowMoveAction(self):
+	def slowMoveAction(self): #Moves the tetrimino down slowly
 	
 		if gameClock.fall.check(gameClock.frameTick) == True:
 			if self.movCollisionCheck('down') == True:
@@ -532,7 +546,7 @@ class MovingPiece:
 				self.createNextMove('down')
 				self.applyNextMove()		
 			
-	def createNextMove(self,moveType):
+	def createNextMove(self,moveType): #Creates the next move of the tetrimino
 		
 		self.lastMoveType = moveType
 		
@@ -540,7 +554,7 @@ class MovingPiece:
 			self.blocks[i].nextPos.row = self.blocks[i].currentPos.row + directions[moveType][ROW]
 			self.blocks[i].nextPos.col = self.blocks[i].currentPos.col + directions[moveType][COL]
 			
-	def movCollisionCheck_BLOCK(self,dirType,blockIndex):
+	def movCollisionCheck_BLOCK(self,dirType,blockIndex): #Collision check for next move for a single block
 		if dirType == 'down':
 			if (self.blocks[blockIndex].currentPos.row+1 > self.rowNum-1) or self.blockMat[self.blocks[blockIndex].currentPos.row+directions[dirType][ROW]][self.blocks[blockIndex].currentPos.col+directions[dirType][COL]] != 'empty':
 				return True
@@ -584,7 +598,7 @@ class MovingPiece:
 		origin[COL] = self.blocks[0].currentPos.col - self.currentDef[0][COL]
 		return origin
 	
-	def rotate(self,rotationType):
+	def rotate(self,rotationType): #Rotates the tetrimino
 		
 		if self.type != 'O':
 			tempBlocks = [[0] * 2 for i in range(4)]		
@@ -806,5 +820,5 @@ def gameLoop():
 key = GameKeyInput()		
 gameClock = GameClock()	
 gameLoop()	
-pygame.quit()
-sys.exit()
+pygame.quit() #shuts down the pygame library
+sys.exit() #Exits the game
