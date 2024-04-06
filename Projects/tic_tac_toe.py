@@ -71,7 +71,7 @@ def who_wins(grid):
 
 def main():
     print("Welcome to Tic Tac Toe")
-    print("developed by alessandro with help from rylmovuk")
+    print("developed by ale111ale with help from rylmovuk")
     print()
     print()
     run_ttt_game()
