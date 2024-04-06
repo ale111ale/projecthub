@@ -1,6 +1,6 @@
 
 print("===============================================PythonVER===============================================")
-print("#                                     PythonExprorer git_beta Build 42                                #")
+print("#                                     PythonExprorer git_beta Build 45                                #")
 print("#######################################################################################################")
 
 print("this project was made with collaboration from rylmovuk")
