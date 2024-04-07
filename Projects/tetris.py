@@ -42,8 +42,8 @@ fontGAMEOVER = pygame.font.SysFont('agencyfb', GAMEOVER_FONT_SIZE)
 fontTitle = pygame.font.SysFont('agencyfb', TITLE_FONT_SIZE)
 fontVersion = pygame.font.SysFont('agencyfb', VERSION_FONT_SIZE)
 
-ROW = (0) 
-COL = (1)
+ROW = 0
+COL = 1
 
 #Some color definitions
 BLACK = (0,0,0)
@@ -64,7 +64,7 @@ blockColors = {		#Defines colors of the tetriminos
 'J' : (30,30,201), #BLUE
 'L' : (240,110,2) } #ORANGE
 
-#Initial(spawn) block definitons of each piece
+#Initial(spawn) block definitions of each piece
 pieceDefs = {
 'I' : ((1,0),(1,1),(1,2),(1,3)),
 'O' : ((0,1),(0,2),(1,1),(1,2)),
@@ -89,7 +89,7 @@ levelSpeeds = (48,43,38,33,28,23,18,13,8,6,5,5,5,4,4,4,3,3,3,2,2,2,2,2,2,2,2,2,2
 
 baseLinePoints = (0,40,100,300,1200)
 #Total score is calculated as: Score = level*baseLinePoints[clearedLineNumberAtATime] + totalDropCount
-#Drop means the action the player forces the piece down instead of free fall(By key combinations: down, down-left, down-rigth arrows)
+#Drop means the action the player forces the piece down instead of free fall(By key combinations: down, down-left, down-right arrows)
 
 #Class for the game input keys and their status
 class GameKeyInput:
@@ -303,7 +303,7 @@ class MainBoard:
 			gameDisplay.blit(text1,(xPosRef+self.blockSize,self.yPos+(yBlockRef+1.5)*self.blockSize))
 			text2 = fontSB.render('to', False, self.whiteSineAnimation())
 			gameDisplay.blit(text2,(xPosRef+self.blockSize,self.yPos+(yBlockRef+3)*self.blockSize))
-			# Draws "start" or "restart" based on whether it is the first round or notwas 
+			# Draws "start" or "restart" based on if the game has started once
 			if self.gameStatus == 'firstStart':
 				text3 = fontSB.render('start', False, self.whiteSineAnimation())
 				gameDisplay.blit(text3,(xPosRef+self.blockSize,self.yPos+(yBlockRef+4.5)*self.blockSize))
@@ -706,7 +706,7 @@ class MovingPiece:
 					
 			else: # 'released'
 				key.down.status = 'idle'
-				#gameClock.fall.preFrame = gameClock.frameTick #Commented out because each seperate down key press and release creates a delay which makes the game easier
+				#gameClock.fall.preFrame = gameClock.frameTick #Commented out because each separate down key press and release creates a delay which makes the game easier
 			
 		#else: # 'collided'			
 
